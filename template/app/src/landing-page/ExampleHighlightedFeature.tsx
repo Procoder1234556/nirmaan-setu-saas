@@ -5,8 +5,8 @@ import { HighlightedFeature } from "./components/HighlightedFeature";
 export function AIReady() {
   return (
     <HighlightedFeature
-      name="Example Feature Highlight"
-      description="Yo! Use this component to show off the most important features in your app."
+      name="Causal Monotonic Reordering & Dynamic CPM Engine"
+      description="Frontline field engineers capture voice notes and DPR progress completely offline. When reconnected, Nirmaan Setu sorts updates by cryptographic hardware monotonic clocks and executes forward/backward passes to immediately alert planners to critical path slips before they cascade."
       highlightedComponent={<AIReadyExample />}
       direction="row-reverse"
     />

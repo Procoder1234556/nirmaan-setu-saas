@@ -1,4 +1,4 @@
-import { LogIn, Menu } from "lucide-react";
+import { LogIn, Menu, HardHat } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Link as ReactRouterLink } from "react-router";
 import { useAuth } from "wasp/client/auth";
@@ -78,17 +78,29 @@ export function NavBar({
                 className="text-foreground hover:text-primary flex items-center transition-colors duration-300 ease-in-out"
               >
                 <NavLogo isScrolled={isScrolled} />
-                <span
-                  className={cn(
-                    "text-foreground font-semibold leading-6 transition-all duration-300",
-                    {
-                      "ml-2 text-sm": !isScrolled,
-                      "ml-2 text-xs": isScrolled,
-                    },
+                <div className="flex flex-col ml-2.5">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={cn(
+                        "text-foreground font-bold tracking-tight leading-none transition-all duration-300",
+                        {
+                          "text-base": !isScrolled,
+                          "text-sm": isScrolled,
+                        },
+                      )}
+                    >
+                      Nirmaan Setu
+                    </span>
+                    <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                      OIL INDIA
+                    </span>
+                  </div>
+                  {!isScrolled && (
+                    <span className="text-[11px] text-muted-foreground hidden sm:block mt-0.5">
+                      Primavera P6 Causal Layer
+                    </span>
                   )}
-                >
-                  Your SaaS
-                </span>
+                </div>
               </WaspRouterLink>
 
               <ul className="ml-4 hidden items-center gap-6 lg:flex">
@@ -179,9 +191,12 @@ function NavBarMobileMenu({
         <SheetContent side="right" className="w-[300px] sm:w-[400px]">
           <SheetHeader>
             <SheetTitle className="flex items-center">
-              <WaspRouterLink to={routes.LandingPageRoute.to}>
-                <span className="sr-only">Your SaaS</span>
+              <WaspRouterLink to={routes.LandingPageRoute.to} className="flex items-center gap-2">
                 <NavLogo isScrolled={false} />
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-base">Nirmaan Setu</span>
+                  <span className="text-[10px] text-muted-foreground uppercase font-semibold">OIL INDIA LIMITED</span>
+                </div>
               </WaspRouterLink>
             </SheetTitle>
           </SheetHeader>
@@ -246,13 +261,16 @@ function renderNavigationItems(
 
 function NavLogo({ isScrolled }: { isScrolled: boolean }) {
   return (
-    <img
-      className={cn("rounded-md transition-all duration-500", {
-        "size-8": !isScrolled,
-        "size-7": isScrolled,
-      })}
-      src={logo}
-      alt="Your SaaS App"
-    />
+    <div
+      className={cn(
+        "rounded-lg bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 flex items-center justify-center text-white shadow-sm transition-all duration-300",
+        {
+          "size-9": !isScrolled,
+          "size-7": isScrolled,
+        },
+      )}
+    >
+      <HardHat className={isScrolled ? "size-4" : "size-5"} />
+    </div>
   );
 }

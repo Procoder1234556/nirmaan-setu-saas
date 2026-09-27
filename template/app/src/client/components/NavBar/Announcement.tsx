@@ -1,32 +1,18 @@
-const ANNOUNCEMENT_URL = "https://github.com/wasp-lang/wasp";
-
 export function Announcement() {
   return (
-    <div className="from-accent to-secondary text-primary-foreground bg-linear-to-r relative flex w-full items-center justify-center gap-3 p-3 text-center font-semibold">
+    <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 text-white relative flex w-full items-center justify-center gap-3 py-2 px-4 text-center text-xs font-medium shadow-sm">
+      <div className="flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+        <span className="font-bold tracking-wide">OIL INDIA LIMITED:</span>
+        <span className="hidden sm:inline">Nirmaan Setu Live — Causal Hardware Monotonic Sync & Primavera P6 Linking Active</span>
+        <span className="sm:hidden">Nirmaan Setu Live Sync Active</span>
+      </div>
+      <div className="bg-white/30 hidden w-px h-3.5 sm:block" />
       <a
-        href={ANNOUNCEMENT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hidden cursor-pointer transition-opacity hover:opacity-90 hover:drop-shadow-sm lg:block"
+        href="/projects"
+        className="bg-white/15 hover:bg-white/25 border border-white/20 transition-colors rounded-full px-2.5 py-0.5 text-[11px] font-semibold flex items-center gap-1"
       >
-        Support Open-Source Software!
-      </a>
-      <div className="bg-primary-foreground/20 hidden w-0.5 self-stretch lg:block"></div>
-      <a
-        href={ANNOUNCEMENT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-background/20 hover:bg-background/30 hidden cursor-pointer rounded-full px-2.5 py-1 text-xs tracking-wider transition-colors lg:block"
-      >
-        Star Our Repo on Github ⭐️ →
-      </a>
-      <a
-        href={ANNOUNCEMENT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-background/20 hover:bg-background/30 cursor-pointer rounded-full px-2.5 py-1 text-xs transition-colors lg:hidden"
-      >
-        ⭐️ Star the Our Repo and Support Open-Source! ⭐️
+        Launch Portfolio Cockpit →
       </a>
     </div>
   );
