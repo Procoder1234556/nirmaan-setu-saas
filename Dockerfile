@@ -5,8 +5,10 @@ WORKDIR /app
 COPY template/app ./template/app
 WORKDIR /app/template/app
 RUN wasp install && wasp build
+RUN cd /app/template/app/.wasp/out/server && npm run bundle
+RUN (cd /app/template/app/.wasp/out/web-app && npm run build) || true
 
-EXPOSE 3000
-ENV PORT=3000
+EXPOSE 10000
+ENV PORT=10000
 ENV NODE_ENV=production
-CMD ["sh", "-c", "cd /app/template/app/.wasp/out && (npm run start-production || npm start || (cd server && npm start))"]
+CMD ["sh", "-c", "cd /app/template/app/.wasp/out/server && (npm run start-production || (npx prisma db push --schema=../db/schema.prisma --accept-data-loss && npm run start-prod) || npm run start-prod || node bundle/server.js)"]
