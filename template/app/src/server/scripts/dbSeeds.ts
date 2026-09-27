@@ -6,7 +6,7 @@ import {
   SubscriptionStatus,
 } from "../../payment/plans";
 
-type MockUserData = Omit<User, "id">;
+type MockUserData = Partial<Omit<User, "id">>;
 
 /**
  * This function, which we've imported in `app.db.seeds` in the `main.wasp` file,
@@ -441,5 +441,7 @@ function generateMockUserData(): MockUserData {
     subscriptionPlan: subscriptionStatus
       ? faker.helpers.arrayElement(getSubscriptionPaymentPlanIds())
       : null,
+    role: "PLANNER",
+    department: "Project Controls",
   };
 }
