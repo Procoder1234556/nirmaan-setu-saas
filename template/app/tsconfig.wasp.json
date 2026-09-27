@@ -15,7 +15,7 @@
     "allowJs": true,
     "noEmit": true,
 
-    "lib": ["esnext"],
+    "lib": ["ES2025"],
     "types": ["node"]
   },
   "include": ["**/*.wasp.ts", ".wasp/out/types/spec"]
