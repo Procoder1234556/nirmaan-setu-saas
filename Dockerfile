@@ -1,6 +1,5 @@
 FROM node:18 AS builder
-RUN curl -sSL https://get.wasp.sh/installer.sh | sh
-ENV PATH="/root/.local/bin:${PATH}"
+RUN npm install -g @wasp.sh/wasp-cli
 WORKDIR /app
 COPY template/app ./template/app
 WORKDIR /app/template/app
