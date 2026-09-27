@@ -19,12 +19,12 @@ import { stripeEnvSchema } from "./payment/stripe/env";
 export const serverEnvValidationSchema = defineEnvValidationSchema(
   z.object({
     ...authEnvSchema.shape,
-    ...stripeEnvSchema.partial().shape,
-    ...lemonSqueezyEnvSchema.partial().shape,
-    ...polarEnvSchema.partial().shape,
-    ...demoAiAppEnvSchema.partial().shape,
-    ...fileUploadEnvSchema.partial().shape,
-    ...plausibleEnvSchema.partial().shape,
-    ...googleAnalyticsEnvSchema.partial().shape,
+    ...stripeEnvSchema.shape,
+    ...lemonSqueezyEnvSchema.shape,
+    ...polarEnvSchema.shape,
+    ...demoAiAppEnvSchema.shape,
+    ...fileUploadEnvSchema.shape,
+    ...plausibleEnvSchema.shape,
+    ...googleAnalyticsEnvSchema.shape,
   }),
 );
