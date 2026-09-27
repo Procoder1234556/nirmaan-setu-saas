@@ -93,7 +93,9 @@ export function FieldLogPage() {
   useEffect(() => {
     try {
       localStorage.setItem(LOCAL_STORAGE_OUTBOX_KEY, JSON.stringify(outbox));
-    } catch {}
+    } catch {
+      // Ignore localStorage write error
+    }
   }, [outbox]);
 
   // Voice recording timer simulation

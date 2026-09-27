@@ -1,25 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parsePrimaveraXER, parseMSProjectXML } from '../parsers/xerParser.ts';
-import { generatePrimaveraXER } from '../parsers/xerExporter.ts';
-import { calculateCPM } from '../cpm/cpmEngine.ts';
+import { parsePrimaveraXER, parseMSProjectXML } from '../parsers/xerParser';
+import { generatePrimaveraXER } from '../parsers/xerExporter';
+import { calculateCPM } from '../cpm/cpmEngine';
 import {
   matchFieldEventToActivities,
   extractProgressDelta,
-  LightweightVectorizer,
   cosineSimilarityDense,
-} from '../matching/semanticMatcher.ts';
+} from '../matching/semanticMatcher';
 import {
   reconcileFieldEventsCausally,
   processFieldEventsBatch,
-} from '../sync/causalSync.ts';
+} from '../sync/causalSync';
 import type {
   CPMActivityInput,
   CPMDependencyInput,
   RawFieldEventInput,
   SemanticCandidate,
-} from '../types.ts';
+} from '../types';
 
 // ==========================================
 // 1. PRIMAVERA P6 (.XER) & MSP XML PARSER TESTS

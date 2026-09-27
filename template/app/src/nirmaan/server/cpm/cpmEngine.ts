@@ -5,7 +5,7 @@ import type {
   CPMCalculatedActivity,
   CPMScheduleResult,
   DependencyType,
-} from '../types.ts';
+} from '../types';
 
 interface AdjacencyEdge {
   targetId: string;
@@ -36,25 +36,33 @@ export function calculateCPM(
   }
 
   // Normalize activities to handle both database models and raw parsed activities
-  const activities: CPMActivityInput[] = rawActivities.map((a: any) => ({
-    id: a.id || a.activityCode,
-    name: a.name || a.activityCode,
-    durationDays: a.durationDays ?? a.plannedDurationDays ?? 1,
-    baselineStart: a.baselineStart ? new Date(a.baselineStart) : (a.plannedStart ? new Date(a.plannedStart) : new Date()),
-    baselineFinish: a.baselineFinish ? new Date(a.baselineFinish) : (a.plannedFinish ? new Date(a.plannedFinish) : new Date()),
-    actualStart: a.actualStart ? new Date(a.actualStart) : null,
-    actualFinish: a.actualFinish ? new Date(a.actualFinish) : null,
-    percentComplete: a.percentComplete ?? 0,
-    discipline: a.discipline,
-    wbsPath: a.wbsPath,
-  }));
+  const activities: CPMActivityInput[] = rawActivities.map((a) => {
+    const act = a as unknown as Record<string, unknown>;
+    return {
+      id: a.id || (act.activityCode as string),
+      name: a.name || (act.activityCode as string),
+      durationDays: a.durationDays ?? (act.plannedDurationDays as number) ?? 1,
+      baselineStart: a.baselineStart ? new Date(a.baselineStart) : (act.plannedStart ? new Date(act.plannedStart as string) : new Date()),
+      baselineFinish: a.baselineFinish ? new Date(a.baselineFinish) : (act.plannedFinish ? new Date(act.plannedFinish as string) : new Date()),
+      actualStart: a.actualStart ? new Date(a.actualStart) : null,
+      actualFinish: a.actualFinish ? new Date(a.actualFinish) : null,
+      percentComplete: a.percentComplete ?? 0,
+      discipline: a.discipline,
+      wbsPath: a.wbsPath,
+    };
+  });
 
-  const dependencies: CPMDependencyInput[] = rawDependencies.map((d: any) => ({
-    predecessorId: d.predecessorId || d.predecessor?.activityCode,
-    successorId: d.successorId || d.successor?.activityCode,
-    dependencyType: d.dependencyType || 'FS',
-    lagDays: d.lagDays || 0,
-  }));
+  const dependencies: CPMDependencyInput[] = rawDependencies.map((d) => {
+    const dep = d as unknown as Record<string, unknown>;
+    const pred = dep.predecessor as Record<string, unknown> | undefined;
+    const succ = dep.successor as Record<string, unknown> | undefined;
+    return {
+      predecessorId: d.predecessorId || (pred?.activityCode as string),
+      successorId: d.successorId || (succ?.activityCode as string),
+      dependencyType: d.dependencyType || 'FS',
+      lagDays: d.lagDays,
+    };
+  });
 
   // 1. Index activities and determine project base start date
   const actMap = new Map<string, CPMActivityInput>();

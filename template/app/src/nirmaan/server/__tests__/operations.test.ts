@@ -12,7 +12,7 @@ import {
   getReviewerQueue,
   getDelayPredictions,
   getHistoricalBenchmarks,
-} from '../operations.ts';
+} from '../operations';
 
 // In-memory lightweight mock database representing Prisma
 function createMockPrisma() {
@@ -51,7 +51,7 @@ function createMockPrisma() {
   return {
     project: {
       async upsert({ where, create, update }: any) {
-        let existing = Array.from(store.projects.values()).find(p => p.code === where.code);
+        const existing = Array.from(store.projects.values()).find(p => p.code === where.code);
         if (existing) {
           Object.assign(existing, update, { updatedAt: new Date() });
           return existing;
@@ -103,8 +103,7 @@ function createMockPrisma() {
 
     baselineActivity: {
       async upsert({ where, create, update }: any) {
-        const key = `${where.projectId_activityCode.projectId}:${where.projectId_activityCode.activityCode}`;
-        let existing = Array.from(store.activities.values()).find(
+        const existing = Array.from(store.activities.values()).find(
           a => a.projectId === where.projectId_activityCode.projectId && a.activityCode === where.projectId_activityCode.activityCode
         );
         if (existing) {

@@ -4,7 +4,7 @@ import type {
   SemanticMatchOutput,
   MatchScoreResult,
   MatchStatus,
-} from '../types.ts';
+} from '../types';
 
 export const AUTO_MATCH_THRESHOLD = 0.85;
 export const REVIEW_QUEUE_THRESHOLD = 0.60;

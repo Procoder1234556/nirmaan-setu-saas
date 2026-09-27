@@ -1,5 +1,5 @@
 // ponytail: Clean string generator for Primavera P6 .XER write-back; zero heavy dependencies.
-import type { ParsedSchedule } from '../types.ts';
+
 
 export interface ActivityActuals {
   activityCode: string;

@@ -4,8 +4,8 @@ import type {
   ReconciledEvent,
   SemanticCandidate,
   SemanticMatchOutput,
-} from '../types.ts';
-import { matchFieldEventToActivities, extractProgressDelta } from '../matching/semanticMatcher.ts';
+} from '../types';
+import { matchFieldEventToActivities, extractProgressDelta } from '../matching/semanticMatcher';
 
 export interface SyncBatchResult {
   reconciledEvents: ReconciledEvent[];

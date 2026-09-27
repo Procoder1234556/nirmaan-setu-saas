@@ -1,15 +1,15 @@
 // ponytail: Lean server operations bridging in-process engines directly to Prisma.
-import { parsePrimaveraXER, parseMSProjectXML } from './parsers/xerParser.ts';
-import { generatePrimaveraXER } from './parsers/xerExporter.ts';
-import { calculateCPM } from './cpm/cpmEngine.ts';
-import { processFieldEventsBatch } from './sync/causalSync.ts';
-import { formatActivityEmbeddingText } from './matching/semanticMatcher.ts';
+import { parsePrimaveraXER, parseMSProjectXML } from './parsers/xerParser';
+import { generatePrimaveraXER } from './parsers/xerExporter';
+import { calculateCPM } from './cpm/cpmEngine';
+import { processFieldEventsBatch } from './sync/causalSync';
+import { formatActivityEmbeddingText } from './matching/semanticMatcher';
 import type {
   CPMActivityInput,
   CPMDependencyInput,
   RawFieldEventInput,
   SemanticCandidate,
-} from './types.ts';
+} from './types';
 
 // ponytail: Native input interfaces with zero external dependency overhead
 export interface UploadBaselineInput {
@@ -75,13 +75,17 @@ async function getPrismaClient(context?: any) {
       prismaClient = wasp.prisma;
       return prismaClient;
     }
-  } catch {}
+  } catch {
+    // Ignore and fallback
+  }
 
   try {
     const { PrismaClient } = await import('@prisma/client');
     prismaClient = new PrismaClient();
     return prismaClient;
-  } catch {}
+  } catch {
+    // Ignore and fallback
+  }
 
   return null;
 }

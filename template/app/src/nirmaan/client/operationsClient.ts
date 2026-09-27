@@ -31,7 +31,9 @@ function setStored<T>(key: string, val: T): void {
   try {
     localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(val));
     window.dispatchEvent(new CustomEvent('nirmaan_state_change', { detail: { key } }));
-  } catch {}
+  } catch {
+    // Ignore localStorage write error
+  }
 }
 
 // ----------------------------------------------------

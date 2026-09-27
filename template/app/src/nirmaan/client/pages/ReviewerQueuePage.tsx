@@ -36,6 +36,7 @@ export function ReviewerQueuePage() {
   // Sync active candidate when item changes
   useEffect(() => {
     if (currentItem) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveCandidateId(currentItem.topCandidate.id);
       setProgressDelta(currentItem.progressDeltaPercent || 85);
     }
@@ -68,8 +69,9 @@ export function ReviewerQueuePage() {
         if (selectedIndex >= items.length - 1) {
           setSelectedIndex(Math.max(0, items.length - 2));
         }
-      } catch (err: any) {
-        alert('Resolution failed: ' + (err.message || 'Unknown error'));
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Unknown error';
+        alert('Resolution failed: ' + msg);
       }
     },
     [currentItem, activeCandidateId, progressDelta, selectedIndex, items.length, refetch]

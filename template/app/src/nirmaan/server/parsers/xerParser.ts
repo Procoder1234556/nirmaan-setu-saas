@@ -6,7 +6,7 @@ import type {
   ParsedActivity,
   ParsedDependency,
   DependencyType,
-} from '../types.ts';
+} from '../types';
 
 interface RawRow {
   [fieldName: string]: string;
